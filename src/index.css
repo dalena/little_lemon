@@ -5,9 +5,252 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #61736E;
+  width: 100%;
+  height: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background: #8B9894;
+  max-height: 15vh;
+  padding: 30px 70px;
+  box-shadow: 0px 4px 15px 5px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+  width: 250px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+nav a {
+  color: #ffffff;
+  font-family: 'Karla', Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+nav a:hover {
+  color: #495E57;
+  transition: all .5s ease;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 70px;
+
+
+}
+
+.titleCont {
+  max-width: 1440px;
+  padding: 30px 70px;
+  align-self: center;
+}
+
+.titleBox {
+  color: #192E27;
+  font-family: 'Markazi Text', Georgia, 'Times New Roman', Times, serif;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 64px;
+  ;
+  text-align: justify;
+  padding: 0px 58px;
+}
+
+.resBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resBox button {
+  background: #4D625C;
+  color: #ffffff;
+  font-family: 'Karla', Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  text-decoration: none;
+  font-weight: Regular;
+  text-transform: uppercase;
+  padding: 20px 50px;
+  border: solid 2px white;
+  box-shadow: 8px 8px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.resBox button:hover {
+  box-shadow: none;
+  transition: all .5s ease;
+  cursor: pointer;
+
+}
+
+section h2 {
+  color: #192E27;
+  font-family: 'Markazi Text', Georgia, 'Times New Roman', Times, serif;
+  font-size: 92px;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+section {
+  padding-bottom: 10vh;
+}
+
+.specialBox {
+  /* background: red; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: space-between;
+  gap: 60px;
+}
+
+.specialCard {
+  background: #4D625C;
+  border-radius: 26px;
+  width: 358px;
+  overflow: hidden;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+
+}
+
+.cardImg {
+  margin: 0;
+  padding: 0;
+  aspect-ratio: 16 / 12;
+  overflow: hidden;
+}
+
+.cardImg img {
+  max-width: 100%;
+  transform-origin: 110px 600px;
+  transform: scale(1.5);
+  transition: transform 0.4s ease-in-out;
+
+}
+
+.cardBody {
+  color: #ffffff;
+  padding: 10px 30px;
+}
+
+.cardBody h3 {
+  font-size: 32px;
+}
+
+.cardBody p {
+  font-size: 24px;
+}
+
+.cardButton {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 42px;
+}
+
+.cardButton button {
+  color: #ffffff;
+  font-size: 20px;
+  font-family: 'Karla', Arial, Helvetica, sans-serif;
+  padding: 20px 20px;
+  border: solid 2px white;
+  background: #495E57;
+  border-radius: 50px;
+  width: 198px;
+  height: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 14px 18px rgba(0, 0, 0, 0.25), 0 0px 8px rgba(0, 0, 0, 0.22);
+
+}
+
+.quoteBox {
+  /* background: red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.quoteCard {
+  /* background: red; */
+  display: flex;
+  flex-direction: column;
+  max-width: 850px;
+
+}
+
+.quoteCard h3 {
+  margin:0;
+  text-align: right;
+}
+
+.quoteCard p {
+  color: #192E27;
+  font-size: 36px;
+  font-family: 'Karla', Arial, Helvetica, sans-serif;
+  font-weight: 100;
+}
+
+.quoteCard img {
+  max-height: 80px;
+}
+.quoteCard h4 {
+  color: #192E27;
+  font-size: 45px;
+  font-family: 'Karla', Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  text-align: justify;
+  padding: 0px 120px;
+  max-width: 75%;
+  align-self: center;
+}
+
+.quoteCard p {
+  align-self: flex-end;
+}
+
+footer {
+  padding: 70px;
+  display: flex;
+  flex-direction: row;
+  background: #495E57;
+  color: #ffffff;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: center;
+  gap: 60px;
+}
+
+.footerBox {
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+}
+
+.footerBox img {
+  max-height: 186px;
+}
+
+.footerBox h5 {
+  font-size: 24px;
+  margin: 0;
+  font-family: 'Karla', Arial, Helvetica, sans-serif;
 }

@@ -1,7 +1,9 @@
 function Nav() {
     return (
         <nav>
-            NAV
+            <a href="/about">About</a>
+            <a href="/main">Main</a>
+            <a href="/footer">Footer</a>
         </nav>
     );
 }

@@ -20,33 +20,69 @@ import {
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
 import useSubmit from "../hooks/useSubmit";
-import { useAlertContext } from "../context/alertContext";
+import { useAlertContext } from "../context/alertContext.js";
 
 
 const Reservations = () => {
-    const [sliderValue, setSliderValue] = useState(50)
+    const { isLoading, response, submit } = useSubmit();
+    const { onOpen } = useAlertContext();
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            phone: '',
+            type: '',
+            comment: '',
+            date: '',
+            time: '',
+            guests: '',
+        },
+        onSubmit: async (values) => {
+            await SubmitEvent(values);
+            if (response) {
+                onOpen('error', response.message);
+                return
+            }
+            onOpen('success', 'Your reservation has been confirmed');
+            formik.resetForm();
+        },
+        validationSchema: Yup.object().shape({
+            name: Yup.string()
+                .required('Required'),
+            email: Yup.string().email('Invalid email').required('Required'),
+            phone: Yup.string()
+                .required('Required'),
+            type: Yup.string().oneOf(['birthday', 'anniversary', 'other']),
+            comment: Yup.string(),
+            date: Yup.date()
+                .required('Required'),
+            time: Yup.string()
+                .required('Required'),
+            guests: Yup.number()
+                .required('Required'),
+        }),
 
-    const labelStyles = {
-        mt: '2',
-        ml: '-2.5',
-        fontSize: 'sm',
-    }
+    })
+    const [sliderValue, setSliderValue] = useState(2)
+
     const inputStyles = {
-        borderColor:'#527066',
-        borderWidth:'2px',
-        borderRadius:'12px',
-        bg:'#34BD93',
+        borderColor: '#527066',
+        borderWidth: '2px',
+        borderRadius: '12px',
+        bg: '#34BD93',
         color: '#192E27',
-   }
+    }
     return (
         <section className="resCont subPage">
             <h2>Reservations</h2>
             <div className="resBox">
-                <VStack rounded={26} w="640px" p={34} alignItems="flex-start" background="#7A998F">
+                <VStack rounded={26} w="640px" p={34} alignItems="flex-start" background="#BAD1CA"
+                    boxShadow="dark-lg"
+                    mb={50}>
                     <Box p={12} rounded="md" w="100%">
-                        <form>
+                        <form onSubmit={formik.handleSubmit}>
                             <VStack spacing={9}>
-                                <FormControl isInvalid={false}>
+                                <FormControl isInvalid={formik.errors.date && formik.touched.date}>
                                     <FormLabel htmlFor="date">Select Date*</FormLabel>
                                     <Input
                                         id="date"
@@ -54,11 +90,15 @@ const Reservations = () => {
                                         size="md"
                                         type="date"
                                         style={inputStyles}
+                                        onChange={formik.handleChange}
+                                        value={formik.values.date}
+                                        onBlur={formik.handleBlur}
+                                        {...formik.getFieldProps("date")}
 
                                     />
-                                    <FormErrorMessage></FormErrorMessage>
+                                    <FormErrorMessage>{formik.errors.date}</FormErrorMessage>
                                 </FormControl>
-                                <FormControl isInvalid={false}>
+                                <FormControl isInvalid={formik.errors.time && formik.touched.time}>
                                     <FormLabel htmlFor="time">Select Time*</FormLabel>
                                     <Input
                                         id="time"
@@ -66,17 +106,21 @@ const Reservations = () => {
                                         size="md"
                                         type="time"
                                         style={inputStyles}
+                                        onChange={formik.handleChange}
+                                        value={formik.values.time}
+                                        onBlur={formik.handleBlur}
+                                        {...formik.getFieldProps("time")}
                                     />
-                                    <FormErrorMessage></FormErrorMessage>
+                                    <FormErrorMessage>{formik.errors.time}</FormErrorMessage>
                                 </FormControl>
-                                <FormControl isInvalid={false}>
+                                <FormControl isInvalid={formik.errors.guests && formik.touched.guests}>
                                     <FormLabel pb={45} htmlFor="guests">Number of Guests* </FormLabel>
                                     <Slider defaultValue={2} min={2} max={12} step={1} aria-label='slider-ex-6' onChange={(val) => setSliderValue(val)}>
                                         <SliderTrack
                                             bg="#527066"
                                         >
                                             <SliderFilledTrack
-                                                bg='#273C35'
+                                                bg='#2F5E4E'
                                             >
                                             </SliderFilledTrack>
                                         </SliderTrack>
@@ -106,8 +150,8 @@ const Reservations = () => {
                                         placeholder="Select an Occasion"
                                         style={inputStyles}
                                     >
-                                        <option value="hireMe">Birthday</option>
-                                        <option value="openSource">
+                                        <option value="birthday">Birthday</option>
+                                        <option value="anniversary">
                                             Anniversary
                                         </option>
                                         <option value="other">Other</option>
@@ -127,36 +171,52 @@ const Reservations = () => {
                                     borderWidth={1}
                                 >
                                 </Divider>
-                                <FormControl isInvalid={false}>
-                                    <FormLabel htmlFor="firstName">Name*</FormLabel>
+                                <FormControl isInvalid={formik.errors.name && formik.touched.name}>
+                                    <FormLabel htmlFor="name">Name*</FormLabel>
                                     <Input
-                                        id="firstName"
-                                        name="firstName"
+                                        id="name"
+                                        name="name"
                                         style={inputStyles}
+                                        onChange={formik.handleChange}
+                                        value={formik.values.name}
+                                        onBlur={formik.handleBlur}
+                                        {...formik.getFieldProps("name")}
                                     />
-                                    <FormErrorMessage></FormErrorMessage>
+                                    <FormErrorMessage>{formik.errors.name}</FormErrorMessage>
                                 </FormControl>
-                                <FormControl isInvalid={false}>
+                                <FormControl isInvalid={formik.errors.email && formik.touched.email}>
                                     <FormLabel htmlFor="email">Email*</FormLabel>
                                     <Input
                                         id="email"
                                         name="email"
                                         type="email"
                                         style={inputStyles}
+                                        onChange={formik.handleChange}
+                                        value={formik.values.email}
+                                        onBlur={formik.handleBlur}
+                                        {...formik.getFieldProps("email")}
                                     />
-                                    <FormErrorMessage></FormErrorMessage>
+                                    <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
                                 </FormControl>
-                                <FormControl isInvalid={false}>
+                                <FormControl isInvalid={formik.errors.phone && formik.touched.phone}>
                                     <FormLabel htmlFor="phone">Phone number*</FormLabel>
                                     <Input
                                         id="phone"
                                         name="phone"
                                         type="phone"
                                         style={inputStyles}
+                                        onChange={formik.handleChange}
+                                        value={formik.values.phone}
+                                        onBlur={formik.handleBlur}
+                                        {...formik.getFieldProps("phone")}
                                     />
-                                    <FormErrorMessage></FormErrorMessage>
+                                    <FormErrorMessage>{formik.errors.phone}</FormErrorMessage>
                                 </FormControl>
-                                <Button type="submit" colorScheme="purple" width="full">
+                                <Button
+                                    type="submit"
+                                    width="full"
+                                    borderRadius={0}
+                                >
                                     Submit
                                 </Button>
                             </VStack>

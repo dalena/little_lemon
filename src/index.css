@@ -100,6 +100,7 @@ main, .subPage {
   box-shadow: none;
   transition: all .5s ease;
   cursor: pointer;
+  background:#2F5E4E;
 
 }
 

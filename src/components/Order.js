@@ -1,7 +1,9 @@
 function Order() {
     return (
     <>
-    <div>Order</div>
+    <section className="subPage">
+        <h2>Order</h2>
+    </section>
     </>
     );
 }

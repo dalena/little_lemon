@@ -1,8 +1,8 @@
 function Menu() {
     return (
-    <>
-    <div>Menu</div>
-    </>
+        <section className="subPage">
+            <h2>Menu</h2>
+        </section>
     );
 }
 

@@ -31,13 +31,6 @@ const Reservations = () => {
         ml: '-2.5',
         fontSize: 'sm',
     }
-    const inputStyles = {
-        borderColor:'#527066',
-        borderWidth:'2px',
-        borderRadius:'12px',
-        bg:'#34BD93',
-        color: '#192E27',
-   }
     return (
         <section className="resCont subPage">
             <h2>Reservations</h2>
@@ -51,10 +44,9 @@ const Reservations = () => {
                                     <Input
                                         id="date"
                                         name="date"
+                                        placeholder="Select Date"
                                         size="md"
                                         type="date"
-                                        style={inputStyles}
-
                                     />
                                     <FormErrorMessage></FormErrorMessage>
                                 </FormControl>
@@ -63,22 +55,17 @@ const Reservations = () => {
                                     <Input
                                         id="time"
                                         name="time"
+                                        placeholder="Select Time"
                                         size="md"
                                         type="time"
-                                        style={inputStyles}
                                     />
                                     <FormErrorMessage></FormErrorMessage>
                                 </FormControl>
                                 <FormControl isInvalid={false}>
-                                    <FormLabel pb={45} htmlFor="guests">Number of Guests* </FormLabel>
-                                    <Slider defaultValue={2} min={2} max={12} step={1} aria-label='slider-ex-6' onChange={(val) => setSliderValue(val)}>
-                                        <SliderTrack
-                                            bg="#527066"
-                                        >
-                                            <SliderFilledTrack
-                                                bg='#273C35'
-                                            >
-                                            </SliderFilledTrack>
+                                    <FormLabel htmlFor="guests">Number of Guests*</FormLabel>
+                                    <Slider defaultValue={2} min={2} max={12} step={1} aria-label='slider-ex-6' background='#F4CE14' onChange={(val) => setSliderValue(val)}>
+                                        <SliderTrack>
+                                            <SliderFilledTrack />
                                         </SliderTrack>
                                         <SliderMark
                                             value={sliderValue}
@@ -90,6 +77,7 @@ const Reservations = () => {
                                             w='12'
                                             id="guests"
                                             name="guests"
+                                            placeholder="Number of Guests"
                                             type="range"
                                         >
                                             {sliderValue}
@@ -100,12 +88,7 @@ const Reservations = () => {
                                 </FormControl>
                                 <FormControl>
                                     <FormLabel htmlFor="type">Occassion</FormLabel>
-                                    <Select
-                                        id="type"
-                                        name="type"
-                                        placeholder="Select an Occasion"
-                                        style={inputStyles}
-                                    >
+                                    <Select id="type" name="type">
                                         <option value="hireMe">Birthday</option>
                                         <option value="openSource">
                                             Anniversary
@@ -113,46 +96,39 @@ const Reservations = () => {
                                         <option value="other">Other</option>
                                     </Select>
                                 </FormControl>
-                                <FormControl>
+                                <FormControl isInvalid={false}>
                                     <FormLabel htmlFor="comment">Additional Comments</FormLabel>
                                     <Textarea
                                         id="comment"
                                         name="comment"
                                         height={140}
-                                        style={inputStyles}
                                     />
+                                    <FormErrorMessage></FormErrorMessage>
                                 </FormControl>
-                                <Divider
-                                    borderColor="#495E57"
-                                    borderWidth={1}
-                                >
-                                </Divider>
+                                <Divider />
                                 <FormControl isInvalid={false}>
-                                    <FormLabel htmlFor="firstName">Name*</FormLabel>
+                                    <FormLabel htmlFor="firstName">Name</FormLabel>
                                     <Input
                                         id="firstName"
                                         name="firstName"
-                                        style={inputStyles}
                                     />
                                     <FormErrorMessage></FormErrorMessage>
                                 </FormControl>
                                 <FormControl isInvalid={false}>
-                                    <FormLabel htmlFor="email">Email*</FormLabel>
+                                    <FormLabel htmlFor="email">Email Address</FormLabel>
                                     <Input
                                         id="email"
                                         name="email"
                                         type="email"
-                                        style={inputStyles}
                                     />
                                     <FormErrorMessage></FormErrorMessage>
                                 </FormControl>
                                 <FormControl isInvalid={false}>
-                                    <FormLabel htmlFor="phone">Phone number*</FormLabel>
+                                    <FormLabel htmlFor="phone">Phone number</FormLabel>
                                     <Input
                                         id="phone"
                                         name="phone"
                                         type="phone"
-                                        style={inputStyles}
                                     />
                                     <FormErrorMessage></FormErrorMessage>
                                 </FormControl>

@@ -1,8 +1,8 @@
 function About() {
     return (
-    <>
-    <div>About</div>
-    </>
+        <section className="subPage">
+            <h2>About</h2>
+        </section>
     );
 }
 

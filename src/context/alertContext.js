@@ -1,6 +1,6 @@
 import {createContext, useContext, useState} from "react";
 
-const AlertContext = createContext(1);
+const AlertContext = createContext(undefined);
 
 export const AlertProvider = ({ children }) => {
   const [state, setState] = useState({
@@ -8,7 +8,7 @@ export const AlertProvider = ({ children }) => {
     // Type can be either "success" or "error"
     type: 'success',
     // Message to be displayed, can be any string
-    message: 'testsete',
+    message: '',
   });
 
   return (

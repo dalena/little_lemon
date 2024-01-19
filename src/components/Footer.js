@@ -1,4 +1,5 @@
 import logoWhite from "../assets/brand/logoWhite.png"
+import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faInstagram,
@@ -9,27 +10,30 @@ const socials = [
     {
         icon: faInstagram,
         url: "https://instagram.com",
+        id: 0,
     },
     {
         icon: faTwitter,
         url: "https://twitter.com",
+        id: 1,
     },
     {
         icon: faYoutube,
         url: "https://www.youtube.com",
+        id: 2,
     },
 ];
+const listSocials = socials.map(social =>
+    <li key={social.id}>
+        <Link to={social.url}>
+            <FontAwesomeIcon
+                icon={social.icon}
+                size="xl"
+            /></Link>
+    </li>
+);
 const Footer = () => {
-    const listSocials = socials.map(social => {
-        return (
-            <a href={social.url}>
-                <FontAwesomeIcon
-                    icon={social.icon}
-                    size="xl"
-                />
-            </a>
-        );
-    });
+
     return (
         <footer>
             <div className="footerBox">
@@ -53,7 +57,9 @@ const Footer = () => {
             <div className="footerBox">
                 <h5>Connect</h5>
                 <div className="footerSocials">
-                    {listSocials}
+                    <ul>
+                        {listSocials}
+                    </ul>
                 </div>
             </div>
         </footer>

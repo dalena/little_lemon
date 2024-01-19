@@ -18,35 +18,31 @@ import {
     SliderMark,
 } from "@chakra-ui/react";
 import * as Yup from 'yup';
-import useSubmit from "../hooks/useSubmit";
-import { useAlertContext } from "../context/alertContext.js";
 import TimesList from "./TimesList.js";
 
 
-const Reservations = () => {
-    const { isLoading, response, submit } = useSubmit();
-    const { onOpen } = useAlertContext();
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+const ReservationForm = ( {onBookingSubmit} ) => {
+    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
     const formik = useFormik({
         initialValues: {
             name: '',
             email: '',
             phone: '',
-            type: '',
-            comment: '',
-            guests: 2,
             date: '',
             time: '',
+            guests: 2,
+            type: '',
+            comment: '',
         },
         onSubmit: async (values) => {
-            await new SubmitEvent(values);
-            if (response) {
-                onOpen('error', response.message);
-                return
-            }
-            onOpen('success', 'Your reservation has been confirmed');
+            const updatedTimes = times.map(time =>
+                time.id === selectedTimeId ? { ...time, isAvailable: false } : time
+            );
+            setTimes(updatedTimes);
+            // alert(JSON.stringify(values, null, 2));
             formik.resetForm();
+            onBookingSubmit(values);
         },
         validationSchema: Yup.object().shape({
             name: Yup.string()
@@ -64,7 +60,7 @@ const Reservations = () => {
         }),
 
     });
-    console.log(formik);
+    // console.log(formik);
     const [sliderValue, setSliderValue] = useState(2)
 
     const inputStyles = {
@@ -74,6 +70,25 @@ const Reservations = () => {
         bg: '#34BD93',
         color: '#192E27',
     }
+    const [selectedTimeId, setSelectedTimeId] = useState(null);
+    const [times, setTimes] = useState([
+        { title: '5:00', id: 0, isAvailable: true },
+        { title: '5:15', id: 1, isAvailable: true },
+        { title: '5:30', id: 2, isAvailable: true },
+        { title: '6:00', id: 3, isAvailable: true },
+        { title: '6:15', id: 4, isAvailable: true },
+        { title: '6:30', id: 5, isAvailable: true },
+        { title: '7:00', id: 6, isAvailable: true },
+        { title: '7:15', id: 7, isAvailable: true },
+        { title: '7:30', id: 8, isAvailable: true },
+    ]);
+    const handleTimeSelect = (id) => {
+        const selectedTime = times.find(time => time.id === id);
+        if (selectedTime) {
+            setSelectedTimeId(id);
+            formik.setFieldValue("time", selectedTime.title);
+        }
+    };
     return (
         <div className="resBox">
             <VStack rounded={26} w="640px" p={34} alignItems="flex-start" background="#BAD1CA"
@@ -100,27 +115,11 @@ const Reservations = () => {
                             </FormControl>
                             <FormControl isInvalid={formik.errors.time && formik.touched.time}>
                                 <FormLabel htmlFor="time">Select Time*</FormLabel>
-                                {/* <Select
-                                    id="time"
-                                    name="time"
-                                    size="md"
-                                    type="time"
-                                    style={inputStyles}
-                                    onChange={formik.handleChange}
-                                    value={formik.values.time}
-                                    onBlur={formik.handleBlur}
-                                    {...formik.getFieldProps("time")}
-                                >
-                                    <option>17:00</option>
-                                    <option>18:00</option>
-                                    <option>19:00</option>
-                                    <option>20:00</option>
-                                    <option>21:00</option>
-                                    <option>22:00</option>
-                                </Select> */}
-                                <TimesList selectCallback={(timeObject) => {
-                                    formik.setFieldValue("time", timeObject.title)
-                                }} />
+                                <TimesList
+                                    times={times}
+                                    selectedTimeId={selectedTimeId}
+                                    onTimeSelect={handleTimeSelect}
+                                />
                                 <FormErrorMessage>{formik.errors.time}</FormErrorMessage>
                             </FormControl>
                             <FormControl isInvalid={formik.errors.guests && formik.touched.guests}>
@@ -133,7 +132,7 @@ const Reservations = () => {
                                         bg="#527066"
                                     >
                                         <SliderFilledTrack
-                                            bg='#2F5E4E'
+                                            bg='#3b8069'
                                         >
                                         </SliderFilledTrack>
                                     </SliderTrack>
@@ -238,7 +237,7 @@ const Reservations = () => {
                                 width="full"
                                 borderRadius={0}
                                 className="reserve"
-                            // onClick={() => handleReservation(selectedTimeId)}
+                                aria-label="Submit Reservation"
                             >
                                 Submit
                             </Button>
@@ -250,4 +249,4 @@ const Reservations = () => {
     );
 }
 
-export default Reservations;
+export default ReservationForm;

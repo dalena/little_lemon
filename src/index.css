@@ -25,14 +25,18 @@ header {
   width: 250px;
 }
 
-nav {
+nav,
+nav ul {
   display: flex;
   align-items: center;
+  gap: 42px;
+  justify-content: center;
+  list-style-type: none;
+
 }
 
 nav li {
-  display: flex;
-  gap: 42px;
+  /* display: flex; */
 }
 
 nav a {
@@ -49,7 +53,8 @@ nav a:hover {
   transition: all .5s ease;
 }
 
-main, .subPage {
+main,
+.subPage {
   display: flex;
   flex-direction: column;
   padding: 30px 70px;
@@ -76,14 +81,13 @@ main, .subPage {
   max-width: 1440px;
 
 }
-
-.resBox {
+.resbutBox {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.resBox button {
+.resbutBox button {
   background: #4D625C;
   color: #ffffff;
   font-family: 'Karla', Arial, Helvetica, sans-serif;
@@ -96,13 +100,32 @@ main, .subPage {
   box-shadow: 8px 8px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+.resBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button.reserve  {
+  background: #3b8069;
+  color: #ffffff;
+  font-family: 'Karla', Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  text-decoration: none;
+  font-weight: Regular;
+  text-transform: uppercase;
+  padding: 30px 50px;
+  border: solid 2px white;
+  box-shadow: 8px 8px 4px 0px rgba(0, 0, 0, 0.25);
+}
 
 
-.resBox button:hover {
+
+.resBox button:hover, .resbutBox button:hover {
   box-shadow: none;
   transition: all .5s ease;
   cursor: pointer;
-  background:#2F5E4E;
+  background: #45987c;
 
 }
 
@@ -127,13 +150,13 @@ section {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: space-between;
-  gap: 60px;
+  gap: 30px;
 }
 
 .specialCard {
   background: #61736E;
   border-radius: 26px;
-  width: 358px;
+  width: 330px;
   overflow: hidden;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
@@ -207,7 +230,7 @@ section {
 }
 
 .quoteCard h3 {
-  margin:0;
+  margin: 0;
   text-align: right;
 }
 
@@ -221,6 +244,7 @@ section {
 .quoteCard img {
   max-height: 80px;
 }
+
 .quoteCard h4 {
   color: #192E27;
   font-size: 45px;
@@ -251,7 +275,7 @@ footer {
 .footerBox {
   display: flex;
   flex-direction: column;
-  justify-content:flex-start;
+  justify-content: flex-start;
 }
 
 .footerBox img {
@@ -264,9 +288,10 @@ footer {
   font-family: 'Karla', Arial, Helvetica, sans-serif;
 }
 
-.footerSocials {
+.footerSocials ul {
   display: flex;
   gap: 1.5em;
+  list-style-type: none;
 }
 
 .time-grid {
@@ -293,16 +318,22 @@ button.time-button {
 }
 
 
-button.time-button.selected,  button.time-button:hover{
-  color: #495E57;
-  background: #FFFBE9;
+button.time-button.selected,
+button.time-button:hover {
+  color: #ffffff;
+  background: #3b8069;
   box-shadow: 0px 4px 15px 5px rgba(0, 0, 0, 0.25);
   transition: all .2s ease;
-  border-color: #495E57;
+  border-color: #33705b;
 
 }
 
-button.time-button.disabled {
+button.time-button:disabled {
   opacity: .5;
   cursor: not-allowed;
+  color: #495E57;
+  background: #F6F9F8;
+  box-shadow: none;
+  transition: none;
+  border: solid 2px #5f5f5f;
 }

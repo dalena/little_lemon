@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const Card = ({ title, description, price, imageSrc }) => {
     return (
         <div className="specialCard">
@@ -10,7 +12,7 @@ const Card = ({ title, description, price, imageSrc }) => {
                 <p>${price}</p>
             </div>
             <div className="cardButton">
-                <button>Order</button>
+                <Link to="/order"><button aria-label="Order">Order</button></Link>
             </div>
         </div>
     );

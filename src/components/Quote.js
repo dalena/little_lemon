@@ -1,17 +1,11 @@
-import quote from "../assets/brand/quote.png";
-
+// import tomato from "../assets/brand/tomato.svg";
+import QuoteCard from "./QuoteCard";
 function Quote() {
     return (
         <section className="quoteCont">
-        <h2>Testimonials</h2>
-        <div className="quoteBox">
-            <div className="quoteCard">
-                <h3><img src={quote} alt="a quotation mark"></img></h3>
-                <h4>Every dinner is more than a meal, it is a celebration of friendship and flavor</h4>
-                <p>— Clementine C.</p>
-            </div>
-        </div>
-    </section>
+            <h2>Testimonials</h2>
+            <QuoteCard />
+        </section>
     );
 }
 export default Quote;

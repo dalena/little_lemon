@@ -15,7 +15,7 @@ code {
 header {
   display: flex;
   justify-content: space-between;
-  background: #8B9894;
+  background: #495E57;
   max-height: 15vh;
   padding: 30px 70px;
   box-shadow: 0px 4px 15px 5px rgba(0, 0, 0, 0.25);
@@ -40,7 +40,7 @@ nav li {
 }
 
 nav a {
-  color: #ffffff;
+  color: #fff;
   font-family: 'Karla', Arial, Helvetica, sans-serif;
   font-size: 20px;
   text-decoration: none;
@@ -49,7 +49,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #495E57;
+  color: #192E27;
   transition: all .5s ease;
 }
 
@@ -68,6 +68,7 @@ main,
   justify-content: center;
   align-items: center;
   gap: 45px;
+  background:url('./assets/brand/lemon.svg') no-repeat left center;
 }
 
 .titleBox {
@@ -81,6 +82,7 @@ main,
   max-width: 1440px;
 
 }
+
 .resbutBox {
   display: flex;
   justify-content: center;
@@ -106,7 +108,7 @@ main,
   align-items: center;
 }
 
-button.reserve  {
+button.reserve {
   background: #3b8069;
   color: #ffffff;
   font-family: 'Karla', Arial, Helvetica, sans-serif;
@@ -121,7 +123,8 @@ button.reserve  {
 
 
 
-.resBox button:hover, .resbutBox button:hover {
+.resBox button:hover,
+.resbutBox button:hover {
   box-shadow: none;
   transition: all .5s ease;
   cursor: pointer;
@@ -158,6 +161,10 @@ section {
   border-radius: 26px;
   width: 330px;
   overflow: hidden;
+  display: grid;
+  grid-template-rows: 1fr 1fr .5fr;
+  /* flex-direction: column;
+  align-self: end; */
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
 }
@@ -193,7 +200,7 @@ section {
 .cardButton {
   display: flex;
   justify-content: center;
-  padding-bottom: 42px;
+  padding: 20px 0 42px 0;
 }
 
 .cardButton button {
@@ -213,36 +220,90 @@ section {
 
 }
 
-.quoteBox {
-  /* background: red; */
-  display: flex;
-  flex-direction: column;
+.cardButton button:hover {
+  box-shadow: none;
+  transition: all .5s ease-in-out;
+  cursor: pointer;
+  background: #45987c;
+}
+
+.wwaCont {
+  background:url('./assets/brand/onion2.svg') no-repeat left bottom;
+  color: #192E27;
+  font-size: 24px;
+  font-family: 'Karla', Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  line-height: 1.25em;
+}
+
+.wwaBox {
+  display : flex;
   justify-content: center;
   align-items: center;
+  height: 80vh;
+
+}
+.wwaContent {
+  max-width: 90%;
+  display : flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 60px;
+}
+.wwaBox img {
+  max-width: 600px;
+  border:#192E27 solid 1px;
+  box-shadow: 0 14px 18px rgba(0, 0, 0, 0.25), 0 0px 8px rgba(0, 0, 0, 0.22);
+
+}
+
+.quoteCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('./assets/brand/tomato.svg');
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+
+.quoteBox {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 1fr 3fr 1fr;
 }
 
 .quoteCard {
-  /* background: red; */
-  display: flex;
-  flex-direction: column;
-  max-width: 850px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  min-width: 100%;
+  grid-column: 2/3;
+  grid-row: 2/3;
 
 }
 
-.quoteCard h3 {
+.quoteCard-active {
+  opacity: 1;
+}
+
+.quoteBox h3 {
   margin: 0;
-  text-align: right;
+  grid-row: 1/2;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.quoteBox h3 img {
+  max-width: 115px;
 }
 
 .quoteCard p {
   color: #192E27;
   font-size: 36px;
   font-family: 'Karla', Arial, Helvetica, sans-serif;
-  font-weight: 100;
-}
-
-.quoteCard img {
-  max-height: 80px;
+  font-weight: bold;
+  text-align: right;
 }
 
 .quoteCard h4 {
@@ -250,15 +311,12 @@ section {
   font-size: 45px;
   font-family: 'Karla', Arial, Helvetica, sans-serif;
   font-weight: 100;
-  text-align: justify;
+  line-height: 1.25em;
   padding: 0px 120px;
-  max-width: 75%;
+  /* max-width: 75%; */
   align-self: center;
 }
 
-.quoteCard p {
-  align-self: flex-end;
-}
 
 footer {
   padding: 70px;

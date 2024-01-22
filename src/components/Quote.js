@@ -1,4 +1,3 @@
-// import tomato from "../assets/brand/tomato.svg";
 import QuoteCard from "./QuoteCard";
 function Quote() {
     return (

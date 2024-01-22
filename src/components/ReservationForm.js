@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import {
     Box,
@@ -20,8 +20,16 @@ import {
 import * as Yup from 'yup';
 import TimesList from "./TimesList.js";
 
+function convertTo12HourFormat(time) {
+    const [hours, minutes] = time.split(':');
+    const hrs = parseInt(hours, 10);
+    const suffix = hrs >= 12 ? 'PM' : 'AM';
+    const convertedHours = hrs % 12 || 12; // converts '00' to '12'
 
-const ReservationForm = ( {onBookingSubmit} ) => {
+    return `${convertedHours}:${minutes} ${suffix}`;
+}
+
+const ReservationForm = ({ onBookingSubmit }) => {
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
     const formik = useFormik({
@@ -60,7 +68,7 @@ const ReservationForm = ( {onBookingSubmit} ) => {
         }),
 
     });
-    // console.log(formik);
+    console.log(formik);
     const [sliderValue, setSliderValue] = useState(2)
 
     const inputStyles = {
@@ -71,23 +79,33 @@ const ReservationForm = ( {onBookingSubmit} ) => {
         color: '#192E27',
     }
     const [selectedTimeId, setSelectedTimeId] = useState(null);
-    const [times, setTimes] = useState([
-        { title: '5:00', id: 0, isAvailable: true },
-        { title: '5:15', id: 1, isAvailable: true },
-        { title: '5:30', id: 2, isAvailable: true },
-        { title: '6:00', id: 3, isAvailable: true },
-        { title: '6:15', id: 4, isAvailable: true },
-        { title: '6:30', id: 5, isAvailable: true },
-        { title: '7:00', id: 6, isAvailable: true },
-        { title: '7:15', id: 7, isAvailable: true },
-        { title: '7:30', id: 8, isAvailable: true },
-    ]);
-    const handleTimeSelect = (id) => {
-        const selectedTime = times.find(time => time.id === id);
-        if (selectedTime) {
-            setSelectedTimeId(id);
-            formik.setFieldValue("time", selectedTime.title);
+    const [times, setTimes] = useState([]);
+    useEffect(() => {
+        const fetchTimesForDate = async (selectedDate) => {
+            try {
+                const formattedDate = selectedDate.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+                const response = await fetch('available_times_2024.json');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                setTimes(data[formattedDate] || []);
+            } catch (error) {
+                console.error("There was a problem with the fetch operation:", error);
+                setTimes([]);
+            }
+        };
+
+        if (formik.values.date) {
+            const selectedDate = new Date(formik.values.date);
+            fetchTimesForDate(selectedDate);
+        } else {
+            setTimes([]);
         }
+    }, [formik.values.date]);
+
+    const handleTimeSelect = (selectedTimeString) => {
+        setSelectedTimeId(selectedTimeString); // Store the original 24-hour format
+        const convertedTime = convertTo12HourFormat(selectedTimeString);
+        formik.setFieldValue("time", convertedTime); // Store the converted 12-hour format in Formik
     };
     return (
         <div className="resBox">
@@ -117,7 +135,7 @@ const ReservationForm = ( {onBookingSubmit} ) => {
                                 <FormLabel htmlFor="time">Select Time*</FormLabel>
                                 <TimesList
                                     times={times}
-                                    selectedTimeId={selectedTimeId}
+                                    selectedTime={selectedTimeId}
                                     onTimeSelect={handleTimeSelect}
                                 />
                                 <FormErrorMessage>{formik.errors.time}</FormErrorMessage>

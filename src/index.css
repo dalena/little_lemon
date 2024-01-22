@@ -253,7 +253,7 @@ section {
 }
 .wwaBox img {
   max-width: 600px;
-  border:#192E27 solid 1px;
+  border:#fff solid 1px;
   box-shadow: 0 14px 18px rgba(0, 0, 0, 0.25), 0 0px 8px rgba(0, 0, 0, 0.22);
 
 }
@@ -307,8 +307,8 @@ section {
 }
 
 .quoteCard h4 {
-  color: #192E27;
-  font-size: 45px;
+  color: #fff;
+  font-size: 38px;
   font-family: 'Karla', Arial, Helvetica, sans-serif;
   font-weight: 100;
   line-height: 1.25em;

@@ -25,14 +25,19 @@ header {
   width: 250px;
 }
 
-nav,
+nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 nav ul {
   display: flex;
   align-items: center;
   gap: 42px;
   justify-content: center;
   list-style-type: none;
-
+  transition: transform 0.3s ease-in-out;
 }
 
 nav li {
@@ -53,6 +58,40 @@ nav a:hover {
   transition: all .5s ease;
 }
 
+/* Styles for Hamburger Menu */
+.hamburger {
+  display: none;
+  /* Hidden by default */
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  z-index: 1000;
+  /* Ensures it's above other content */
+}
+
+.hamburger div {
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  /* or your preferred color */
+  transition: all 0.3s linear;
+}
+
+/* Transform into X for open state */
+.hamburger.open div:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open div:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open div:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
 main,
 .subPage {
   display: flex;
@@ -68,7 +107,7 @@ main,
   justify-content: center;
   align-items: center;
   gap: 45px;
-  background:url('./assets/brand/lemon.svg') no-repeat left center;
+  background: url('./assets/brand/lemon.svg') no-repeat left center;
 }
 
 .titleBox {
@@ -76,7 +115,7 @@ main,
   font-family: 'Markazi Text', Georgia, 'Times New Roman', Times, serif;
   font-size: 44px;
   font-weight: 500;
-  line-height: 64px;
+  line-height: 1.47em;
   text-align: justify;
   padding: 0px 58px;
   max-width: 1440px;
@@ -228,7 +267,7 @@ section {
 }
 
 .wwaCont {
-  background:url('./assets/brand/onion2.svg') no-repeat left bottom;
+  background: url('./assets/brand/onion2.svg') no-repeat left bottom;
   color: #192E27;
   font-size: 24px;
   font-family: 'Karla', Arial, Helvetica, sans-serif;
@@ -237,23 +276,26 @@ section {
 }
 
 .wwaBox {
-  display : flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 80vh;
 
 }
+
 .wwaContent {
-  max-width: 90%;
-  display : flex;
+  padding: 0px 58px;
+  max-width: 1440px;
+  display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
   gap: 60px;
 }
+
 .wwaBox img {
   max-width: 600px;
-  border:#fff solid 1px;
+  border: #fff solid 1px;
   box-shadow: 0 14px 18px rgba(0, 0, 0, 0.25), 0 0px 8px rgba(0, 0, 0, 0.22);
 
 }
@@ -271,6 +313,7 @@ section {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: 1fr 3fr 1fr;
+  /* height: 1100px; */
 }
 
 .quoteCard {
@@ -394,4 +437,150 @@ button.time-button:disabled {
   box-shadow: none;
   transition: none;
   border: solid 2px #5f5f5f;
+}
+
+@media (max-width: 1207px) {
+  section {
+    padding-bottom: 10vh;
+  }
+
+  .specialCard {
+    width: 300px;
+  }
+
+  .cardBody {
+    padding: 0px 25px;
+  }
+
+  .wwaContent {
+    flex-direction: column;
+  }
+
+  .wwaContent img {
+    width: 100%;
+  }
+
+  .wwaBox {
+    height: auto;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  nav ul {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* Start off-screen to the right */
+    height: 100%;
+    width: 100%;
+    /* Width of the menu */
+    background-color: #495E57;
+    /* Background color of the menu */
+    flex-direction: column;
+    transition: right 0.3s ease-in-out;
+    z-index: 999;
+  }
+
+  .menu.open {
+    right: 0;
+    /* Slide in */
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  header {
+    padding: 30px;
+  }
+
+  .logo {
+    width: 200px;
+  }
+
+  main {
+    padding: 0px 20px;
+  }
+
+  section {
+    min-height: auto;
+  }
+
+  section h2 {
+    font-size: 62px;
+    padding-top: 80px;
+  }
+
+  .titleCont {
+    padding: 30px 0px;
+    justify-content: flex-start;
+  }
+
+  .titleBox {
+    font-size: 24px;
+    text-align: left;
+    padding: 0px 28px;
+    max-width: 1440px;
+  }
+
+
+  .quoteBox {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .quoteBox h3 {
+    display: none;
+  }
+
+  .quoteCard h4 {
+    padding: 0px 0px 40px 0px;
+    font-size: 30px;
+  }
+
+  .quoteCard p {
+    font-size: 28px;
+  }
+
+  .quoteCard {
+    padding-bottom: 50px;
+  }
+
+  footer {
+    flex-direction: column;
+    padding: 60px 30px;
+  }
+
+  .footerBox img {
+    width: 150px;
+    max-height: 100%;
+  }
+
+  .subPage {
+    padding: 30px;
+  }
+
+  .subPage h2 {
+    padding-top: 0px;
+  }
+
+  .css-nafczz {
+    padding: 12px !important;
+  }
+
+  .css-qdq3f6 {
+    padding: 18px;
+  }
+
+  .time-grid {
+    gap: 8px;
+    grid-template-columns: 1fr 1fr;
+
+  }
+
+  button.time-button {
+    font-size: 16px;
+    /* width: 80px; */
+  }
 }

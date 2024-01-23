@@ -68,7 +68,7 @@ const ReservationForm = ({ onBookingSubmit }) => {
         }),
 
     });
-    console.log(formik);
+    // console.log(formik);
     const [sliderValue, setSliderValue] = useState(2)
 
     const inputStyles = {
